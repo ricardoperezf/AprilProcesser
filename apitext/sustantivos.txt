@@ -1,0 +1,5 @@
+ciudad
+mesa
+traajador
+trabajo
+vaso
