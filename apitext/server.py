@@ -51,16 +51,16 @@ def split_sentences(output):
         count_total_words += 1
         if "," in word:
             new_word = word.replace(',', '')
-            finder(new_word)
+            finder(new_word.lower())
         elif "." in word:
             new_word = word.replace(".", "")
-            finder(new_word)
+            finder(new_word.lower())
         else:
-            finder(word)
+            finder(word.lower())
 
-
-# MÉTODO QUE PERMITE HACER LOS DISTINTOS LLAMADOS DE CADA TIPO DE PALABRA PARA HACER EL ANÁLISIS COMPARATIVO
-#   DE LOS MÉTODOS DE BUSCAR VERBO, SUSTANTIVO, ADJETIVO, PRONOMBRE.
+#   MÉTODO QUE PERMITE HACER LOS DISTINTOS LLAMADOS DE CADA TIPO DE PALABRA PARA HACER EL ANÁLISIS COMPARATIVO
+#   DE LOS MÉTODOS DE BUSCAR VERBO, SUSTANTIVO, ADJETIVO, PRONOMBRE. SI UNA PALABRA NO CORRESPONDE A LAS ANTERIORES
+#   ENTONCES SE CONTARÁ COMO DEL RESTO.
 def finder(word):
     global count_another_word
     finder_of_verb = find_verb(word)
@@ -82,8 +82,8 @@ def find_verb(palabra):
                 if palabra == word:
                     count_verbs += 1
                     # print("\n\nSE ENCONTRO EL VERBO = " + word + " Y LA PALABRA FUE = " + palabra + "\n\n" + " COUNT = " + str(count_verbs))
-                    # new_index = "Se encontro = " + palabra + " count = " + str(count_verbs)
-                    # vector_verb.append(new_index)
+                    new_index = "Se encontro = " + palabra + " count = " + str(count_verbs)
+                    vector.append(new_index)
                     return "Se encontro"
 
 
