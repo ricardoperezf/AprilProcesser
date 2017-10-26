@@ -15,6 +15,14 @@
           <option name="port" value="22" />
         </fileTransfer>
       </webServer>
+      <webServer id="cb02a2ba-d7b0-4d58-9dca-621293b6e5fd" name="ssh://ricardo@10.2.4.144:22/home/ricardo/ws/apitext/bin/python">
+        <fileTransfer host="10.2.4.144" port="22" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
     </option>
   </component>
 </project>

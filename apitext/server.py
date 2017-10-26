@@ -24,10 +24,9 @@ def get_text_file():
     global vector, count_verbs, count_nouns, count_adjective, count_pronouns, count_another_word, count_total_words, \
         adjective_text_file, pronoun_text_file
     if request.method == "POST":
-        request_post = request.args
-        output = request_post['ejemplo']
+        output = request.form['ejemplo']
         split_sentences(output)
-        return jsonify("SERVIDOR = Recibiendo txt file del cliente...")
+        return jsonify("SERVIDOR = Se termino de hacer el procesamiento de texto ...")
     else:
         vector.append("Verbos: " + str(count_verbs))
         vector.append("Sustantivos: " + str(count_nouns))
@@ -50,6 +49,9 @@ def split_sentences(output):
             find_first_letter(new_word.lower())
         elif "." in word:
             new_word = word.replace(".", "")
+            find_first_letter(new_word.lower())
+        elif ";" in word:
+            new_word = word.replace(";", "")
             find_first_letter(new_word.lower())
         else:
             find_first_letter(word.lower())

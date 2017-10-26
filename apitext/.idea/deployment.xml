@@ -9,6 +9,13 @@
           </mappings>
         </serverdata>
       </paths>
+      <paths name="ssh://ricardo@10.2.4.144:22/home/ricardo/ws/apitext/bin/python">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/ricardo/ws/apitext" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="ssh://ricardo@192.168.0.15:22/home/ricardo/ws/apitext/bin/python">
         <serverdata>
           <mappings>
