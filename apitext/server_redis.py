@@ -1,8 +1,17 @@
 from flask import Flask, request, jsonify
+import redis
 
 ########################################################################################################################
 # VARIABLES QUE SERVIRÁN PARA USARLAS EN DISTINTOS ALGORITMOS
 app = Flask(__name__)
+r = redis.StrictRedis('localhost')
+
+verb_list_redis = []
+noun_list_redis = []
+adjective_list_redis = []
+pronoun_list_redis = []
+rest_list_redis = []
+
 vector = []
 count_verbs = 0
 count_nouns = 0
@@ -62,37 +71,57 @@ def split_sentences(output):
 # MÉTODO QUE PERMITE CONOCER LA PRIMERA LETRA DE UNA PALABRA PARA ASÍ SABER A CUAL ARCHIVO ANALIZAR SU TIPO DE PALABRA
 #   QUE CORRESPONDE.
 def find_first_letter(palabra):
-    global verb_text_file, noun_text_file, adjective_text_file, pronoun_text_file
+    global verb_text_file, verb_list_redis, noun_text_file, noun_list_redis, adjective_text_file, adjective_list_redis, pronoun_text_file, pronoun_list_redis
     if palabra[0] == "a" or palabra[0] == "b" or palabra[0] == "c" or palabra[0] == "d" or palabra[0] == "e":
         verb_text_file = "verbos/verbos_abcde.txt"
+        verb_list_redis = "v_abcde"
         noun_text_file = "sustantivos/sustantivos_abcde.txt"
+        noun_list_redis = "n_abcde"
         adjective_text_file = "adjetivos/adjetivos_abcde.txt"
+        adjective_list_redis = "a_abcde"
         pronoun_text_file = "pronombres/pronombres_abcde.txt"
+        pronoun_list_redis = "p_abcde"
         finder(palabra)
     elif palabra[0] == "f" or palabra[0] == "g" or palabra[0] == "h" or palabra[0] == "i" or palabra[0] == "j":
         verb_text_file = "verbos/verbos_fghij.txt"
+        verb_list_redis = "v_fghij"
         noun_text_file = "sustantivos/sustantivos_fghij.txt"
+        noun_list_redis = "n_fghij"
         adjective_text_file = "adjetivos/adjetivos_fghij.txt"
+        adjective_list_redis = "a_fghij"
         pronoun_text_file = "pronombres/pronombres_fghij.txt"
+        pronoun_list_redis = "p_fghij"
         finder(palabra)
     elif palabra[0] == "k" or palabra[0] == "l" or palabra[0] == "m" or palabra[0] == "n" or palabra[0] == "o":
         verb_text_file = "verbos/verbos_klmno.txt"
+        verb_list_redis = "v_klmno"
         noun_text_file = "sustantivos/sustantivos_klmno.txt"
+        noun_list_redis = "n_klmno"
         adjective_text_file = "adjetivos/adjetivos_klmno.txt"
+        adjective_list_redis = "a_klmno"
         pronoun_text_file = "pronombres/pronombres_klmno.txt"
+        pronoun_list_redis = "p_klmno"
         finder(palabra)
     elif palabra[0] == "p" or palabra[0] == "q" or palabra[0] == "r" or palabra[0] == "s" or palabra[0] == "t":
         verb_text_file = "verbos/verbos_pqrst.txt"
+        verb_list_redis = "v_pqrst"
         noun_text_file = "sustantivos/sustantivos_pqrst.txt"
+        noun_list_redis = "n_pqrst"
         adjective_text_file = "adjetivos/adjetivos_pqrst.txt"
+        adjective_list_redis = "a_pqrst"
         pronoun_text_file = "pronombres/pronombres_pqrst.txt"
+        pronoun_list_redis = "p_pqrst"
         finder(palabra)
     elif palabra[0] == "u" or palabra[0] == "v" or palabra[0] == "w" or palabra[0] == "x" or palabra[0] == "y" \
             or palabra[0] == "z":
         verb_text_file = "verbos/verbos_uvwxyz.txt"
+        verb_list_redis = "v_uwxyz"
         noun_text_file = "sustantivos/sustantivos_uvwxyz.txt"
+        noun_list_redis = "n_uwxyz"
         adjective_text_file = "adjetivos/adjetivos_uvwxyz.txt"
+        adjective_list_redis = "a_uwxyz"
         pronoun_text_file = "pronombres/pronombres_uwxyz.txt"
+        pronoun_list_redis = "p_uwxyz"
         finder(palabra)
 
 
@@ -112,64 +141,88 @@ def finder(word):
 # MÉTODO QUE PERMITE HACER EL ANÁLISIS COMPARATIVO ENTRE LAS PALABRAS RECIBIDAD DEL TXT FILE CON LAS PALABRAS DEL TXT
 #   INTERNO DE VERBS.
 def find_verb(palabra):
-    global count_verbs, vector, verb_text_file
-    with open(verb_text_file, 'r') as f:
-        for line in f:
-            for word in line.split():
-                if palabra == word.lower():
-                    count_verbs += 1
-                    # print("\n\nSE ENCONTRO EL VERBO = " + word + " Y LA PALABRA FUE = " + palabra + "\n\n" + " COUNT = " + str(count_verbs))
-                    # new_index = "Se encontro = " + palabra + " count = " + str(count_verbs)
-                    # vector.append(new_index)
-                    return "Se encontro"
+    global count_verbs, vector, verb_text_file, verb_list_redis
+    verb_redis = r.lrange(verb_list_redis, 0, -1)
+    if str(verb_redis) == "[]":
+        with open(verb_text_file, 'r') as f:
+            for line in f:
+                for word in line.split():
+                    r.lpush(verb_list_redis, word)
+    else:
+        for word in verb_redis:
+            if "b'" in str(word):
+                new_word = str(word).replace("b'", "")
+            if "'" in new_word:
+                new_word = str(new_word).replace("'", "")
+            if palabra == new_word:
+                count_verbs += 1
+                return "Se encontro"
 
 
 # MÉTODO QUE PERMITE HACER EL ANÁLISIS COMPARATIVO ENTRE LAS PALABRAS RECIBIDAD DEL TXT FILE CON LAS PALABRAS DEL TXT
 #   INTERNO DE NOUNS.
 def find_noun(palabra):
-    global count_nouns, vector, noun_text_file
-    with open(noun_text_file, 'r') as f:
-        for line in f:
-            for word in line.split():
-                if palabra == word.lower():
-                    count_nouns += 1
-                    # print("\n\nSE ENCONTRO EL SUSTANTIVO = " + word + " Y LA PALABRA FUE = " + palabra + "\n\n" + " COUNT = " + str(count_nouns))
-                    # new_index = "Se encontro el sustantivo = " + palabra + " count = " + str(count_nouns)
-                    # vector.append(new_index)
-                    return "Se encontro"
+    global count_nouns, vector, noun_text_file, noun_list_redis
+    noun_redis = r.lrange(noun_list_redis, 0, -1)
+    if str(noun_redis) == "[]":
+        with open(noun_text_file, 'r') as f:
+            for line in f:
+                for word in line.split():
+                    r.lpush(noun_list_redis, word)
+    else:
+        for word in noun_redis:
+            if "b'" in str(word):
+                new_word = str(word).replace("b'", "")
+            if "'" in new_word:
+                new_word = str(new_word).replace("'", "")
+            if palabra == new_word:
+                count_nouns += 1
+                return "Se encontro"
 
 
 # MÉTODO QUE PERMITE HACER EL ANÁLISIS COMPARATIVO ENTRE LAS PALABRAS RECIBIDAD DEL TXT FILE CON LAS PALABRAS DEL TXT
 #   INTERNO DE ADJECTIVES.
 def find_adjective(palabra):
-    global count_adjective, vector, adjective_text_file
-    with open(adjective_text_file, 'r') as f:
-        for line in f:
-            for word in line.split():
-                if palabra == word.lower():
-                    count_adjective += 1
-                    # print("\n\nSE ENCONTRO EL ADJETIVO = " + word + " Y LA PALABRA FUE = " + palabra + "\n\n" + " COUNT = " + str(count_adjective))
-                    # new_index = "Se encontro = " + palabra + " count = " + str(count_adjective)
-                    # vector.append(new_index)
-                    return "Se encontro"
+    global count_adjective, vector, adjective_text_file, adjective_list_redis
+    adjective_redis = r.lrange(adjective_list_redis, 0, -1)
+    if str(adjective_redis) == "[]":
+        with open(adjective_text_file, 'r') as f:
+            for line in f:
+                for word in line.split():
+                    r.lpush(adjective_list_redis, word)
+    else:
+        for word in adjective_redis:
+            if "b'" in str(word):
+                new_word = str(word).replace("b'", "")
+            if "'" in new_word:
+                new_word = str(new_word).replace("'", "")
+            if palabra == new_word:
+                count_adjective += 1
+                return "Se encontro"
 
 
 # MÉTODO QUE PERMITE HACER EL ANÁLISIS COMPARATIVO ENTRE LAS PALABRAS RECIBIDAD DEL TXT FILE CON LAS PALABRAS DEL TXT
 #   INTERNO DE PRONOUNS.
 def find_pronoun(palabra):
-    global count_pronouns, vector, pronoun_text_file
-    with open(pronoun_text_file, 'r') as f:
-        for line in f:
-            for word in line.split():
-                if palabra == word.lower():
-                    count_pronouns += 1
-                    # print("\n\nSE ENCONTRO EL PRONOMBRE = " + word + " Y LA PALABRA FUE = " + palabra + "\n\n" + " COUNT = " + str(count_pronouns))
-                    # new_index = "Se encontro = " + palabra + " count = " + str(count_verbs)
-                    # vector.append(new_index)
-                    return "Se encontro"
+    global count_pronouns, vector, pronoun_text_file, pronoun_list_redis
+    pronoun_redis = r.lrange(pronoun_list_redis, 0, -1)
+    if str(pronoun_redis) == "[]":
+        with open(pronoun_text_file, 'r') as f:
+            for line in f:
+                for word in line.split():
+                    r.lpush(pronoun_list_redis, word)
+    else:
+        for word in pronoun_redis:
+            if "b'" in str(word):
+                new_word = str(word).replace("b'", "")
+            if "'" in new_word:
+                new_word = str(new_word).replace("'", "")
+            if palabra == new_word:
+                count_pronouns += 1
+                return "Se encontro"
 
 
-########################################################################################################################
+# ###########################################################################
 #   INICIAR EL SERVIDOR EN LA DIRECCIÓN ESPECÍFICA Y PUERTO.
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port="5000")
