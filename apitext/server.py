@@ -29,12 +29,12 @@ def get_text_file():
         split_sentences(output)
         return jsonify("SERVIDOR = Se termino de hacer el procesamiento de texto ...")
     else:
-        vector.append("Verbos: " + str(count_verbs))
-        vector.append("Sustantivos: " + str(count_nouns))
-        vector.append("Adjetivos: " + str(count_adjective))
-        vector.append("Pronombres: " + str(count_pronouns))
-        vector.append("Resto: " + str(count_another_word))
-        vector.append("Total palabras: " + str(count_total_words))
+        vector.append(str(count_verbs))
+        vector.append(str(count_nouns))
+        vector.append(str(count_adjective))
+        vector.append(str(count_pronouns))
+        vector.append(str(count_another_word))
+        vector.append(str(count_total_words))
         return jsonify(vector)
 
 
@@ -54,6 +54,24 @@ def split_sentences(output):
             find_first_letter(new_word.lower())
         elif ";" in word:
             new_word = word.replace(";", "")
+            find_first_letter(new_word.lower())
+        elif "!" in word:
+            new_word = word.replace("!", "")
+            find_first_letter(new_word.lower())
+        elif "?" in word:
+            new_word = word.replace("?", "")
+            find_first_letter(new_word.lower())
+        elif "¿" in word:
+            new_word = word.replace("¿", "")
+            find_first_letter(new_word.lower())
+        elif "-" in word:
+            new_word = word.replace("-", "")
+            find_first_letter(new_word.lower())
+        elif "(" in word:
+            new_word = word.replace("(", "")
+            find_first_letter(new_word.lower())
+        elif ")" in word:
+            new_word = word.replace(")", "")
             find_first_letter(new_word.lower())
         else:
             find_first_letter(word.lower())

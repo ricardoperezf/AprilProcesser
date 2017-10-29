@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>API Procesamiento de Texto</title>
+    <!-- Bootstrap -->
+    <link href="https://fonts.googleapis.com/css?family=Questrial" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style> body {
+        font-family: 'Questrial', sans-serif;
+    }</style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="well text-center" style="background-color: #6a5efd">
+        <h4 style="color: white">API Procesamiento de Texto</h4>
+        <h5 style="color: white">Ricardo Pérez.</h5>
+    </div>
+    <div class="container-fluid" style="background-color: #eccafd">
+        <h3>Find your words!</h3>
+        <div class="container" style="background-color: #eccafd">
+            <h4>El resultado del procesamiento es: </h4>
+            <h5>Verbos, sustantivos, adjetivos, pronombres, resto, total de palabras: </h5>
+            <div id="procesamiento"><br></div>
+        </div>
+    </div>
+    <div class="container-fluid" style="background-color: #8afd65">
+        <h3>Gráfico</h3>
+        <div class="container" style="background-color: #f5f4fd">
+            <h4>El gráfico del procesamiento es: </h4>
+            <canvas id="myChart" width="200" height="200"></canvas>
+        </div>
+    </div>
+</div>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.js"></script>
+<script>
+    //  AQUÍ HAREMOS TODA LA CONVERSIÓN DE JSON A UN STRING NORMAL PARA PASAR LOS VALORES DEL PROCESAMIENTO AL GRÁFICO.
+    var resultado = "{{resultado}}";
+    var resultadoSinFormato = resultado.replace(/&#34;/g, "");
+
+    var resultadoSinParentesisInicio = resultado.replace(/&#34;/g, "");
+    var resultadoSinParentesisFinal = resultadoSinParentesisInicio.replace("[", "");
+
+    var labels = ["Verbos", "Sustantivos", "Adjetivos", "Pronombres", "Resto", "Total palabras"];
+    var valoresDeTiposDePalabras = resultadoSinParentesisFinal.replace("]", "").split(",").map(function (resultado) {
+        return resultado;
+    });
+    $(".container").find("#procesamiento").text(valoresDeTiposDePalabras);
+</script>
+<script>
+    var ctx = document.getElementById("myChart").getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: '# de tipos de palabras',
+                data: valoresDeTiposDePalabras,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>
+</body>
+</html>
