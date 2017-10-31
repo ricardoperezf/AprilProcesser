@@ -1,4 +1,4 @@
-# Python APIP rocesamiento De Texto
+# Python API rocesamiento De Texto
 It's an API of Text Processing where you can send a txt file and the API will find the verbs, nouns, adjective, pronoun, rest of words and the total words of the file.
 
 This API can't be use to purpose academic until January, 2018.
