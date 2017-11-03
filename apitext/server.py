@@ -136,9 +136,6 @@ def find_verb(palabra):
             for word in line.split():
                 if palabra == word.lower():
                     count_verbs += 1
-                    # print("\n\nSE ENCONTRO EL VERBO = " + word + " Y LA PALABRA FUE = " + palabra + "\n\n" + " COUNT = " + str(count_verbs))
-                    # new_index = "Se encontro = " + palabra + " count = " + str(count_verbs)
-                    # vector.append(new_index)
                     return "Se encontro"
 
 
@@ -151,9 +148,6 @@ def find_noun(palabra):
             for word in line.split():
                 if palabra == word.lower():
                     count_nouns += 1
-                    # print("\n\nSE ENCONTRO EL SUSTANTIVO = " + word + " Y LA PALABRA FUE = " + palabra + "\n\n" + " COUNT = " + str(count_nouns))
-                    # new_index = "Se encontro el sustantivo = " + palabra + " count = " + str(count_nouns)
-                    # vector.append(new_index)
                     return "Se encontro"
 
 
@@ -166,9 +160,6 @@ def find_adjective(palabra):
             for word in line.split():
                 if palabra == word.lower():
                     count_adjective += 1
-                    # print("\n\nSE ENCONTRO EL ADJETIVO = " + word + " Y LA PALABRA FUE = " + palabra + "\n\n" + " COUNT = " + str(count_adjective))
-                    # new_index = "Se encontro = " + palabra + " count = " + str(count_adjective)
-                    # vector.append(new_index)
                     return "Se encontro"
 
 
@@ -181,9 +172,6 @@ def find_pronoun(palabra):
             for word in line.split():
                 if palabra == word.lower():
                     count_pronouns += 1
-                    # print("\n\nSE ENCONTRO EL PRONOMBRE = " + word + " Y LA PALABRA FUE = " + palabra + "\n\n" + " COUNT = " + str(count_pronouns))
-                    # new_index = "Se encontro = " + palabra + " count = " + str(count_verbs)
-                    # vector.append(new_index)
                     return "Se encontro"
 
 
