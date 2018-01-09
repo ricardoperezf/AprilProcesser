@@ -92,52 +92,52 @@ def find_first_letter(palabra):
     if palabra[0] == "a" or palabra[0] == "b" or palabra[0] == "c" or palabra[0] == "d" or palabra[0] == "e":
         verb_text_file = "verbs/verbos_abcde.txt"
         verb_list_redis = "v_abcde"
-        noun_text_file = "sustantivos/sustantivos_abcde.txt"
+        noun_text_file = "nouns/sustantivos_abcde.txt"
         noun_list_redis = "n_abcde"
-        adjective_text_file = "adjetivos/adjetivos_abcde.txt"
+        adjective_text_file = "adjectives/adjetivos_abcde.txt"
         adjective_list_redis = "a_abcde"
-        pronoun_text_file = "pronombres/pronombres_abcde.txt"
+        pronoun_text_file = "pronouns/pronombres_abcde.txt"
         pronoun_list_redis = "p_abcde"
         finder(palabra)
     elif palabra[0] == "f" or palabra[0] == "g" or palabra[0] == "h" or palabra[0] == "i" or palabra[0] == "j":
         verb_text_file = "verbs/verbos_fghij.txt"
         verb_list_redis = "v_fghij"
-        noun_text_file = "sustantivos/sustantivos_fghij.txt"
+        noun_text_file = "nouns/sustantivos_fghij.txt"
         noun_list_redis = "n_fghij"
-        adjective_text_file = "adjetivos/adjetivos_fghij.txt"
+        adjective_text_file = "adjectives/adjetivos_fghij.txt"
         adjective_list_redis = "a_fghij"
-        pronoun_text_file = "pronombres/pronombres_fghij.txt"
+        pronoun_text_file = "pronouns/pronombres_fghij.txt"
         pronoun_list_redis = "p_fghij"
         finder(palabra)
     elif palabra[0] == "k" or palabra[0] == "l" or palabra[0] == "m" or palabra[0] == "n" or palabra[0] == "o":
         verb_text_file = "verbs/verbos_klmno.txt"
         verb_list_redis = "v_klmno"
-        noun_text_file = "sustantivos/sustantivos_klmno.txt"
+        noun_text_file = "nouns/sustantivos_klmno.txt"
         noun_list_redis = "n_klmno"
-        adjective_text_file = "adjetivos/adjetivos_klmno.txt"
+        adjective_text_file = "adjectives/adjetivos_klmno.txt"
         adjective_list_redis = "a_klmno"
-        pronoun_text_file = "pronombres/pronombres_klmno.txt"
+        pronoun_text_file = "pronouns/pronombres_klmno.txt"
         pronoun_list_redis = "p_klmno"
         finder(palabra)
     elif palabra[0] == "p" or palabra[0] == "q" or palabra[0] == "r" or palabra[0] == "s" or palabra[0] == "t":
         verb_text_file = "verbs/verbos_pqrst.txt"
         verb_list_redis = "v_pqrst"
-        noun_text_file = "sustantivos/sustantivos_pqrst.txt"
+        noun_text_file = "nouns/sustantivos_pqrst.txt"
         noun_list_redis = "n_pqrst"
-        adjective_text_file = "adjetivos/adjetivos_pqrst.txt"
+        adjective_text_file = "adjectives/adjetivos_pqrst.txt"
         adjective_list_redis = "a_pqrst"
-        pronoun_text_file = "pronombres/pronombres_pqrst.txt"
+        pronoun_text_file = "pronouns/pronombres_pqrst.txt"
         pronoun_list_redis = "p_pqrst"
         finder(palabra)
     elif palabra[0] == "u" or palabra[0] == "v" or palabra[0] == "w" or palabra[0] == "x" or palabra[0] == "y" or \
                     palabra[0] == "z":
         verb_text_file = "verbs/verbos_uvwxyz.txt"
         verb_list_redis = "v_uwxyz"
-        noun_text_file = "sustantivos/sustantivos_uvwxyz.txt"
+        noun_text_file = "nouns/sustantivos_uvwxyz.txt"
         noun_list_redis = "n_uwxyz"
-        adjective_text_file = "adjetivos/adjetivos_uvwxyz.txt"
+        adjective_text_file = "adjectives/adjetivos_uvwxyz.txt"
         adjective_list_redis = "a_uwxyz"
-        pronoun_text_file = "pronombres/pronombres_uwxyz.txt"
+        pronoun_text_file = "pronouns/pronombres_uvwxyz.txt"
         pronoun_list_redis = "p_uwxyz"
         finder(palabra)
 
