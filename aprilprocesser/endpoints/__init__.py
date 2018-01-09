@@ -1,5 +1,6 @@
-from aprilprocesser import aprilprocesser_app
+import os
+import glob
 
-@aprilprocesser_app.route("/")
-def hello_world_example():
-    return "Hello World!"
+# We load any .py ended file into __all__ so they become discoverable
+__all__ = [os.path.basename(
+    f)[:-3] for f in glob.glob(os.path.dirname(__file__) + "/*.py")]

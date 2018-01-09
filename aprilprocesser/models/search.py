@@ -1,4 +1,7 @@
 from .books import *
+import sys
+sys.path.insert(0, 'AprilProcesser/aprilprocesser/models/books')
+
 
 class Search:
     def __init__(self, text_file):
@@ -18,11 +21,6 @@ class Search:
     def split_sentences(self):
         output = self.text_file
         for word in output.split():
-            print("\n\n")
-            import os
-            os.getcwd()
-            print(os.path.exists("books/verbs/verbos_klmno.txt"))
-            print("\n\n")
             self.count_total_words += 1
             if "," in word:
                 new_word = word.replace(',', '')
@@ -67,35 +65,36 @@ class Search:
 
     def find_first_letter(self, the_word):
         if the_word[0] == "a" or the_word[0] == "b" or the_word[0] == "c" or the_word[0] == "d" or the_word[0] == "e":
-            self.verb_text_file = "books/verbs/verbos_abcde.txt"
-            self.noun_text_file = "books/sustantivos/sustantivos_abcde.txt"
-            self.adjective_text_file = "books/adjetivos/adjetivos_abcde.txt"
-            self.pronoun_text_file = "books/pronombres/pronombres_abcde.txt"
+            self.verb_text_file = "/home/ricardo/ws/AprilProcesser/AprilProcesser/aprilprocesser/models/books/verbs/verbos_abcde.txt"
+            self.noun_text_file = "/home/ricardo/ws/AprilProcesser/AprilProcesser/aprilprocesser/models/books/sustantivos/sustantivos_abcde.txt"
+            self.adjective_text_file = "/home/ricardo/ws/AprilProcesser/AprilProcesser/aprilprocesser/models/books/adjetivos/adjetivos_abcde.txt"
+            self.pronoun_text_file = "/home/ricardo/ws/AprilProcesser/AprilProcesser/aprilprocesser/models/books/pronombres/pronombres_abcde.txt"
             return self.finder_brain(the_word)
         elif the_word[0] == "f" or the_word[0] == "g" or the_word[0] == "h" or the_word[0] == "i" or the_word[0] == "j":
-            self.verb_text_file = "books/verbs/verbos_fghij.txt"
-            self.noun_text_file = "books/sustantivos/sustantivos_fghij.txt"
-            self.adjective_text_file = "books/adjetivos/adjetivos_fghij.txt"
-            self.pronoun_text_file = "books/pronombres/pronombres_fghij.txt"
+            self.verb_text_file = "/home/ricardo/ws/AprilProcesser/AprilProcesser/aprilprocesser/models/books/verbs/verbos_fghij.txt"
+            self.noun_text_file = "/home/ricardo/ws/AprilProcesser/AprilProcesser/aprilprocesser/models/books/sustantivos/sustantivos_fghij.txt"
+            self.adjective_text_file = "/home/ricardo/ws/AprilProcesser/AprilProcesser/aprilprocesser/models/books/adjetivos/adjetivos_fghij.txt"
+            self.pronoun_text_file = "/home/ricardo/ws/AprilProcesser/AprilProcesser/aprilprocesser/models/books/pronombres/pronombres_fghij.txt"
             return self.finder_brain(the_word)
         elif the_word[0] == "k" or the_word[0] == "l" or the_word[0] == "m" or the_word[0] == "n" or the_word[0] == "o":
-            self.verb_text_file = "books/verbs/verbos_klmno.txt"
-            self.noun_text_file = "books/sustantivos/sustantivos_klmno.txt"
-            self.adjective_text_file = "books/adjetivos/adjetivos_klmno.txt"
-            self.pronoun_text_file = "books/pronombres/pronombres_klmno.txt"
+            self.verb_text_file = "/home/ricardo/ws/AprilProcesser/AprilProcesser/aprilprocesser/models/books/verbs/verbos_klmno.txt"
+            self.noun_text_file = "/home/ricardo/ws/AprilProcesser/AprilProcesser/aprilprocesser/models/books/sustantivos/sustantivos_klmno.txt"
+            self.adjective_text_file = "/home/ricardo/ws/AprilProcesser/AprilProcesser/aprilprocesser/models/books/adjetivos/adjetivos_klmno.txt"
+            self.pronoun_text_file = "/home/ricardo/ws/AprilProcesser/AprilProcesser/aprilprocesser/models/books/pronombres/pronombres_klmno.txt"
             return self.finder_brain(the_word)
         elif the_word[0] == "p" or the_word[0] == "q" or the_word[0] == "r" or the_word[0] == "s" or the_word[0] == "t":
-            self.verb_text_file = "books/verbs/verbos_pqrst.txt"
-            self.noun_text_file = "books/sustantivos/sustantivos_pqrst.txt"
-            self.adjective_text_file = "books/adjetivos/adjetivos_pqrst.txt"
-            self.pronoun_text_file = "books/pronombres/pronombres_pqrst.txt"
+            self.verb_text_file = "/home/ricardo/ws/AprilProcesser/AprilProcesser/aprilprocesser/models/books/verbs/verbos_pqrst.txt"
+            self.noun_text_file = "/home/ricardo/ws/AprilProcesser/AprilProcesser/aprilprocesser/models/books/sustantivos/sustantivos_pqrst.txt"
+            self.adjective_text_file = "/home/ricardo/ws/AprilProcesser/AprilProcesser/aprilprocesser/models/books/adjetivos/adjetivos_pqrst.txt"
+            self.pronoun_text_file = "/home/ricardo/ws/AprilProcesser/AprilProcesser/aprilprocesser/models/books/pronombres/pronombres_pqrst.txt"
             return self.finder_brain(the_word)
         elif the_word[0] == "u" or the_word[0] == "v" or the_word[0] == "w" or the_word[0] == "x" or the_word[
             0] == "y" or the_word[0] == "z":
-            self.verb_text_file = "books/verbs/verbos_uvwxyz.txt"
-            self.noun_text_file = "books/sustantivos/sustantivos_uvwxyz.txt"
-            self.adjective_text_file = "books/adjetivos/adjetivos_uvwxyz.txt"
-            self.pronoun_text_file = "books/pronombres/pronombres_uwxyz.txt"
+            self.verb_text_file = "/home/ricardo/ws/AprilProcesser/AprilProcesser/aprilprocesser/models/books/verbs/verbos_uvwxyz.txt"
+            self.noun_text_file = "/home/ricardo/ws/AprilProcesser/AprilProcesser/aprilprocesser/models/books/sustantivos/sustantivos_uvwxyz.txt"
+            self.adjective_text_file = "/home/ricardo/ws/AprilProcesser/AprilProcesser/aprilprocesser/models/books/adjetivos/adjetivos_uvwxyz.txt"
+            self.adjective_text_file = "/home/ricardo/ws/AprilProcesser/AprilProcesser/aprilprocesser/models/books/adjetivos/adjetivos_uvwxyz.txt"
+            self.pronoun_text_file = "/home/ricardo/ws/AprilProcesser/AprilProcesser/aprilprocesser/models/books/pronombres/pronombres_uwxyz.txt"
             return self.finder_brain(the_word)
 
     def finder_brain(self, word):

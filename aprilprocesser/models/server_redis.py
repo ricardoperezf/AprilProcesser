@@ -3,7 +3,7 @@ import redis
 
 ########################################################################################################################
 # VARIABLES QUE SERVIRÁN PARA USARLAS EN DISTINTOS ALGORITMOS
-app = Flask(__name__)
+
 r = redis.StrictRedis('localhost')
 
 verb_list_redis = []
@@ -31,8 +31,7 @@ pronoun_text_file = ""
 
 @app.route('/api/v1', methods=['POST', 'GET'])
 def get_text_file():
-    global vector, count_verbs, count_nouns, count_adjective, count_pronouns, count_another_word, count_total_words, \
-        adjective_text_file, pronoun_text_file
+    global vector, count_verbs, count_nouns, count_adjective, count_pronouns, count_another_word, count_total_words, adjective_text_file, pronoun_text_file
     if request.method == "POST":
         output = request.form['ejemplo']
         split_sentences(output)
@@ -91,7 +90,7 @@ def split_sentences(output):
 def find_first_letter(palabra):
     global verb_text_file, verb_list_redis, noun_text_file, noun_list_redis, adjective_text_file, adjective_list_redis, pronoun_text_file, pronoun_list_redis
     if palabra[0] == "a" or palabra[0] == "b" or palabra[0] == "c" or palabra[0] == "d" or palabra[0] == "e":
-        verb_text_file = "verbos/verbos_abcde.txt"
+        verb_text_file = "verbs/verbos_abcde.txt"
         verb_list_redis = "v_abcde"
         noun_text_file = "sustantivos/sustantivos_abcde.txt"
         noun_list_redis = "n_abcde"
@@ -101,7 +100,7 @@ def find_first_letter(palabra):
         pronoun_list_redis = "p_abcde"
         finder(palabra)
     elif palabra[0] == "f" or palabra[0] == "g" or palabra[0] == "h" or palabra[0] == "i" or palabra[0] == "j":
-        verb_text_file = "verbos/verbos_fghij.txt"
+        verb_text_file = "verbs/verbos_fghij.txt"
         verb_list_redis = "v_fghij"
         noun_text_file = "sustantivos/sustantivos_fghij.txt"
         noun_list_redis = "n_fghij"
@@ -111,7 +110,7 @@ def find_first_letter(palabra):
         pronoun_list_redis = "p_fghij"
         finder(palabra)
     elif palabra[0] == "k" or palabra[0] == "l" or palabra[0] == "m" or palabra[0] == "n" or palabra[0] == "o":
-        verb_text_file = "verbos/verbos_klmno.txt"
+        verb_text_file = "verbs/verbos_klmno.txt"
         verb_list_redis = "v_klmno"
         noun_text_file = "sustantivos/sustantivos_klmno.txt"
         noun_list_redis = "n_klmno"
@@ -121,7 +120,7 @@ def find_first_letter(palabra):
         pronoun_list_redis = "p_klmno"
         finder(palabra)
     elif palabra[0] == "p" or palabra[0] == "q" or palabra[0] == "r" or palabra[0] == "s" or palabra[0] == "t":
-        verb_text_file = "verbos/verbos_pqrst.txt"
+        verb_text_file = "verbs/verbos_pqrst.txt"
         verb_list_redis = "v_pqrst"
         noun_text_file = "sustantivos/sustantivos_pqrst.txt"
         noun_list_redis = "n_pqrst"
@@ -130,9 +129,9 @@ def find_first_letter(palabra):
         pronoun_text_file = "pronombres/pronombres_pqrst.txt"
         pronoun_list_redis = "p_pqrst"
         finder(palabra)
-    elif palabra[0] == "u" or palabra[0] == "v" or palabra[0] == "w" or palabra[0] == "x" or palabra[0] == "y" \
-            or palabra[0] == "z":
-        verb_text_file = "verbos/verbos_uvwxyz.txt"
+    elif palabra[0] == "u" or palabra[0] == "v" or palabra[0] == "w" or palabra[0] == "x" or palabra[0] == "y" or \
+                    palabra[0] == "z":
+        verb_text_file = "verbs/verbos_uvwxyz.txt"
         verb_list_redis = "v_uwxyz"
         noun_text_file = "sustantivos/sustantivos_uvwxyz.txt"
         noun_list_redis = "n_uwxyz"
@@ -238,9 +237,3 @@ def find_pronoun(palabra):
             if palabra == new_word:
                 count_pronouns += 1
                 return "Se encontro"
-
-
-# ###########################################################################
-#   INICIAR EL SERVIDOR EN LA DIRECCIÓN ESPECÍFICA Y PUERTO.
-if __name__ == '__main__':
-    app.run(host="0.0.0.0", port="5000")
