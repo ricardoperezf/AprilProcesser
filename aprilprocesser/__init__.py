@@ -6,8 +6,8 @@ from flask_pymongo import PyMongo
 from flask_cors import CORS
 
 aprilprocesser_app = Flask(__name__)
-aprilprocesser_app.config['MONGO_DBNAME'] = "reportcard"
-aprilprocesser_app.config['MONGO_URI'] = "mongodb://ricardo:ricardomongodb@ds163826.mlab.com:63826/reportcard"
+aprilprocesser_app.config['MONGO_DBNAME'] = "aprilprocesser"
+aprilprocesser_app.config['MONGO_URI'] = "mongodb://ricardo:ricardomongodb@ds023495.mlab.com:23495/aprilprocesser"
 
 mongo = PyMongo(aprilprocesser_app)
 
