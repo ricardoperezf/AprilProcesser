@@ -6,7 +6,7 @@ class Search:
         self.count_nouns = 0
         self.count_pronouns = 0
         self.count_adjective = 0
-        self.count_another_word = 0
+        self.count_other_words = 0
         self.count_total_words = 0
         self.verb_text_file = ""
         self.noun_text_file = ""
@@ -37,28 +37,28 @@ class Search:
                 self.replace_word(")", word)
             else:
                 new_word_lower = word.lower()
-                self.get_first_letter(new_word_lower)
+                self.set_first_letter(new_word_lower)
         return self.get_result()
 
     def replace_word(self, sign, word):
         new_word = word.replace(sign, '')
         new_word_lower = new_word.lower()
-        return self.get_first_letter(new_word_lower)
+        return self.set_first_letter(new_word_lower)
 
-    def get_first_letter(self, the_word):
+    def set_first_letter(self, the_word):
         if the_word[0] == "a" or the_word[0] == "b" or the_word[0] == "c" or the_word[0] == "d" or the_word[0] == "e":
-            return self.set_first_letter(the_word, "abcde.txt")
+            return self.get_first_letter(the_word, "abcde.txt")
         elif the_word[0] == "f" or the_word[0] == "g" or the_word[0] == "h" or the_word[0] == "i" or the_word[0] == "j":
-            return self.set_first_letter(the_word, "fghij.txt")
+            return self.get_first_letter(the_word, "fghij.txt")
         elif the_word[0] == "k" or the_word[0] == "l" or the_word[0] == "m" or the_word[0] == "n" or the_word[0] == "o":
-            return self.set_first_letter(the_word, "klmno.txt")
+            return self.get_first_letter(the_word, "klmno.txt")
         elif the_word[0] == "p" or the_word[0] == "q" or the_word[0] == "r" or the_word[0] == "s" or the_word[0] == "t":
-            return self.set_first_letter(the_word, "pqrst.txt")
+            return self.get_first_letter(the_word, "pqrst.txt")
         elif the_word[0] == "u" or the_word[0] == "v" or the_word[0] == "w" or the_word[0] == "x" or the_word[
             0] == "y" or the_word[0] == "z":
-            return self.set_first_letter(the_word, "uvwxyz.txt")
+            return self.get_first_letter(the_word, "uvwxyz.txt")
 
-    def set_first_letter(self, the_word, text_file):
+    def get_first_letter(self, the_word, text_file):
         self.verb_text_file = "/home/ricardo/ws/AprilProcesser/AprilProcesser/aprilprocesser/models/books/verbs/verbos_" + text_file
         self.noun_text_file = "/home/ricardo/ws/AprilProcesser/AprilProcesser/aprilprocesser/models/books/nouns/sustantivos_" + text_file
         self.adjective_text_file = "/home/ricardo/ws/AprilProcesser/AprilProcesser/aprilprocesser/models/books/adjectives/adjetivos_" + text_file
@@ -72,8 +72,8 @@ class Search:
         finder_of_adjective = self.find_words(word, "adjective", adjective_text_file)
         finder_of_pronoun = self.find_words(word, "pronoun", pronoun_text_file)
         if finder_of_verb != "It founded" and finder_of_noun != "It founded" and finder_of_adjective != "It founded" and finder_of_pronoun != "It founded":
-            self.count_another_word += 1
-        return self.count_another_word
+            self.count_other_words += 1
+        return self.count_other_words
 
     def find_words(self, find_word, type_of_counter, type_text_file):
         with open(type_text_file, 'r') as f:
@@ -94,10 +94,7 @@ class Search:
                             return "It founded"
 
     def get_result(self):
-        self.vector.append({'verbs': self.count_verbs})
-        self.vector.append({'nouns': self.count_nouns})
-        self.vector.append({'adjectives': self.count_adjective})
-        self.vector.append({'pronouns': self.count_pronouns})
-        self.vector.append({'another_words': self.count_another_word})
-        self.vector.append({'total_words': self.count_total_words})
+        self.vector.append({'verbs': self.count_verbs, 'nouns': self.count_nouns, 'adjectives': self.count_adjective,
+                            'pronouns': self.count_pronouns, 'other_words': self.count_other_words,
+                            'total_words': self.count_total_words})
         return self.vector
