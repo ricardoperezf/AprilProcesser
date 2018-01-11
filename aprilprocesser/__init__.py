@@ -13,4 +13,4 @@ mongo = PyMongo(aprilprocesser_app)
 
 CORS(aprilprocesser_app)
 
-from aprilprocesser.endpoints import *
+from aprilprocesser.controllers import *
