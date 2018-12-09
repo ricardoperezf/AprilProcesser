@@ -13,5 +13,5 @@ If you do the previous configuration, you have to find the iP of your physical m
 Example: 192.168.1.16:5000/start
 
 
-Copyrith Ricardo Pérez and TechCode Academy.
+Copyrigth Ricardo Pérez and TechCode Academy.
 
